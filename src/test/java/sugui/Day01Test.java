@@ -25,18 +25,18 @@ public class Day01Test {
             zoneight234
             7pqrstsixteen
             """;
-    public static int firstBasicResult = 142;
-    public static int secondBasicResult = 281;
+    public static String firstBasicResult = "142";
+    public static String secondBasicResult = "281";
 
     @Test
     public void firstBasicCase() throws IOException {
-        int actualResult = Day01.getFirstPuzzleResult(firstBasicInput);
+        String actualResult = Day01.getFirstPuzzleResult(firstBasicInput);
         assertEquals(firstBasicResult, actualResult);
     }
 
     @Test
     public void secondBasicCase() throws IOException {
-        int actualResult = Day01.getSecondPuzzleResult(secondBasicInput);
+        String actualResult = Day01.getSecondPuzzleResult(secondBasicInput);
         assertEquals(secondBasicResult, actualResult);
     }
 }

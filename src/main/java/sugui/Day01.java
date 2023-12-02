@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.function.IntPredicate;
 
 public class Day01 {
+
     public static Path inputPath = Paths.get("resources/input01.txt");
 
     public static Map<String, List<String>> spelledDigitsMap = Map.of(
@@ -34,7 +35,7 @@ public class Day01 {
         System.out.println("Second result: " + secondResult);
     }
 
-    public static int getFirstPuzzleResult(String input) throws IOException {
+    public static String getFirstPuzzleResult(String input) {
         IntPredicate isDigit = c -> Character.isDigit(c);
         var bufferedReader = new BufferedReader(new StringReader(input));
         var result = bufferedReader.lines()
@@ -53,10 +54,10 @@ public class Day01 {
                     return number;
                 })
                 .reduce(0, (a, b) -> a + b);
-        return result;
+        return Integer.toString(result);
     }
 
-    public static int getSecondPuzzleResult(String input) throws IOException {
+    public static String getSecondPuzzleResult(String input) {
         var bufferedReader = new BufferedReader(new StringReader(input));
         var result = bufferedReader.lines()
                 .map(line -> {
@@ -77,6 +78,6 @@ public class Day01 {
                     int number = Integer.parseInt(positions.get(minPosition) + positions.get(maxPosition));
                     return number;
                 }).reduce(0, (a, b) -> a + b);
-        return result;
+        return Integer.toString(result);
     }
 }
