@@ -71,10 +71,8 @@ public class Day02 {
     public static String getFirstPuzzleResult(String input) {
         List<Game> games = parse(input);
         int result = games.stream()
-                .filter(game -> {
-                    return game.bunches.stream().allMatch(bunch -> bunch.red <= MAX_RED_CONTENTS
-                            && bunch.green <= MAX_GREEN_CONTENTS && bunch.blue <= MAX_BLUE_CONTENTS);
-                })
+                .filter(game -> game.bunches.stream().allMatch(bunch -> bunch.red <= MAX_RED_CONTENTS
+                        && bunch.green <= MAX_GREEN_CONTENTS && bunch.blue <= MAX_BLUE_CONTENTS))
                 .map(game -> game.id)
                 .reduce(0, (a, b) -> a + b);
         return Integer.toString(result);
