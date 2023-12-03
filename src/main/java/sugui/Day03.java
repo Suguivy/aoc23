@@ -14,14 +14,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import sugui.util.IntegerRef;
+import sugui.util.Ref;
 import sugui.util.Pair;
 
 public class Day03 {
 
     public static Path inputPath = Paths.get("resources/input03.txt");
 
-    private static Map<Pair<Integer, Integer>, IntegerRef> numbers = new HashMap<>();
+    private static Map<Pair<Integer, Integer>, Ref<Integer>> numbers = new HashMap<>();
     private static Map<Pair<Integer, Integer>, String> symbols = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
@@ -42,7 +42,7 @@ public class Day03 {
             Matcher numberMatcher = numberPattern.matcher(line);
             Matcher symbolMatcher = symbolPattern.matcher(line);
             while (numberMatcher.find()) {
-                IntegerRef numberRef = new IntegerRef(Integer.parseInt(numberMatcher.group()));
+                Ref<Integer> numberRef = new Ref<Integer>(Integer.parseInt(numberMatcher.group()));
                 for (int col = numberMatcher.start(); col < numberMatcher.end(); col++) {
                     numbers.put(new Pair<>(col, lineNumber), numberRef);
                 }
@@ -59,13 +59,13 @@ public class Day03 {
         loadNumbersAndSymbols(input);
 
         int sumOfPartNumbers = 0;
-        Set<IntegerRef> visitedNumbers = new HashSet<>();
+        Set<Ref<Integer>> visitedNumbers = new HashSet<>();
         for (var symbolPositions : symbols.keySet()) {
             for (int dy = -1; dy <= 1; dy++) {
                 for (int dx = -1; dx <= 1; dx++) {
                     var position = new Pair<>(symbolPositions._1() + dx, symbolPositions._2() + dy);
                     if (numbers.containsKey(position)) {
-                        IntegerRef numberRef = numbers.get(position);
+                        Ref<Integer> numberRef = numbers.get(position);
                         if (!visitedNumbers.contains(numberRef)) {
                             visitedNumbers.add(numberRef);
                             sumOfPartNumbers += numberRef.value();
@@ -83,12 +83,12 @@ public class Day03 {
         int sumOfGearRatios = 0;
         for (var symbolPositions : symbols.keySet()) {
             if ("*".equals(symbols.get(symbolPositions))) {
-                Set<IntegerRef> visitedNumbers = new HashSet<>();
+                Set<Ref<Integer>> visitedNumbers = new HashSet<>();
                 for (int dy = -1; dy <= 1; dy++) {
                     for (int dx = -1; dx <= 1; dx++) {
                         var position = new Pair<>(symbolPositions._1() + dx, symbolPositions._2() + dy);
                         if (numbers.containsKey(position)) {
-                            IntegerRef numberRef = numbers.get(position);
+                            Ref<Integer> numberRef = numbers.get(position);
                             if (!visitedNumbers.contains(numberRef)) {
                                 visitedNumbers.add(numberRef);
                             }
