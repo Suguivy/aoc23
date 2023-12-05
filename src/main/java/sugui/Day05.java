@@ -24,13 +24,13 @@ public class Day05 {
     private record ProductionKitRanged(List<Pair<Long, Long>> seedPairs, List<List<MapInfo>> maps) {
     }
 
-    private record MapInfo(long destination, long source, long range) {
+    public record MapInfo(long destination, long source, long range) {
     }
 
-    private static long getLocation(List<MapInfo> mapper, long origin) {
+    public static long getLocation(List<MapInfo> mapper, long origin) {
         for (var mapInfo : mapper) {
             var originSourceDiff = origin - mapInfo.source;
-            if (originSourceDiff >= 0 && originSourceDiff <= mapInfo.range)
+            if (originSourceDiff >= 0 && originSourceDiff < mapInfo.range)
                 return mapInfo.destination + originSourceDiff;
         }
         return origin;
@@ -103,7 +103,9 @@ public class Day05 {
         ProductionKitRanged prodKit = parseSecond(input);
         long minLocation = Long.MAX_VALUE;
         for (var seedPair : prodKit.seedPairs) {
-            for (long seed = seedPair._1(); seed < seedPair._1() + seedPair._2(); seed++) {
+            long initSeed = seedPair._1();
+            long maxSeed = initSeed + seedPair._2();
+            for (long seed = initSeed; seed < maxSeed; seed++) {
                 long currLocation = seed;
                 for (var map : prodKit.maps) {
                     long newLocation = getLocation(map, currLocation);

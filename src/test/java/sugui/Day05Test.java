@@ -3,6 +3,7 @@ package sugui;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -54,6 +55,13 @@ public class Day05Test {
     public void firstBasicCase() throws IOException {
         String actualResult = Day05.getFirstPuzzleResult(firstBasicInput);
         assertEquals(firstBasicResult, actualResult);
+    }
+
+    @Test
+    public void isGetLocationExclusive() {
+        assertEquals(Day05.getLocation(List.of(
+                new Day05.MapInfo(30, 0, 2)), 2),
+                2);
     }
 
     @Test
