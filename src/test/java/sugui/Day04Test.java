@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import sugui.day04.Day04;
+
 public class Day04Test {
 
     public static String firstBasicInput = """

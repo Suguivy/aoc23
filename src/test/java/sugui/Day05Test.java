@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import sugui.day05.Day05;
+
 /**
  * Unit test for simple App.
  */
