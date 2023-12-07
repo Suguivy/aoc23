@@ -3,9 +3,7 @@ package sugui.util;
 import java.util.Iterator;
 
 public class IntervalIterator implements Iterator<Long> {
-    private Interval interval;
     public IntervalIterator(Interval interval) {
-        this.interval = interval;
     }
 
     @Override
