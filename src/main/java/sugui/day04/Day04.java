@@ -1,4 +1,4 @@
-package sugui;
+package sugui.day04;
 
 import java.io.BufferedReader;
 import java.io.IOException;

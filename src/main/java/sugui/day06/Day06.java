@@ -1,4 +1,4 @@
-package sugui;
+package sugui.day06;
 
 import java.io.IOException;
 import java.nio.file.Files;
