@@ -1,4 +1,4 @@
-package sugui;
+package sugui.day07;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,11 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import sugui.aux.Card;
-import sugui.aux.Hand;
-import sugui.aux.HandComparator;
-import sugui.aux.HandWithJokerComparator;
 
 public class Day07 {
 

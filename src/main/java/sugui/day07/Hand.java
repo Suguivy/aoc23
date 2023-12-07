@@ -1,4 +1,4 @@
-package sugui.aux;
+package sugui.day07;
 
 public record Hand(Card c1, Card c2, Card c3, Card c4, Card c5, int bid) {
 

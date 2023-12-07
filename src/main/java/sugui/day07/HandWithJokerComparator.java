@@ -1,4 +1,4 @@
-package sugui.aux;
+package sugui.day07;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -7,36 +7,45 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import sugui.aux.Hand.HandType;
+import sugui.day07.Hand.HandType;
 
-public class HandComparator implements Comparator<Hand> {
+public class HandWithJokerComparator implements Comparator<Hand> {
 
     private HandType getHandType(Hand hand) {
         Map<String, Integer> cardCount = new HashMap<>();
+        int jokerCount = 0;
         for (Card c : List.of(hand.c1(), hand.c2(), hand.c3(), hand.c4(), hand.c5())) {
-            if (cardCount.containsKey(c.label()))
+            if ("J".equals(c.label())) {
+                jokerCount++;
+            } else if (cardCount.containsKey(c.label())) {
                 cardCount.compute(c.label(), (k, v) -> v + 1);
-            else
+            } else {
                 cardCount.put(c.label(), 1);
+            }
         }
         List<Integer> counts = new ArrayList<>(cardCount.values());
         counts.sort(Comparator.reverseOrder());
-        int fstCount = counts.get(0);
-        int sndCount = counts.size() == 1 ? 0 : counts.get(1);
-        if (fstCount == 5)
+        if (counts.size() == 0) {
+            // Hand of full Jokers
             return HandType.FIVE_OF_A_KIND;
-        else if (fstCount == 4)
-            return HandType.FOUR_OF_A_KIND;
-        else if (fstCount == 3 && sndCount == 2)
-            return HandType.FULL_HOUSE;
-        else if (fstCount == 3 && sndCount == 1)
-            return HandType.THREE_OF_A_KIND;
-        else if (fstCount == 2 && sndCount == 2)
-            return HandType.TWO_PAIR;
-        else if (fstCount == 2 && sndCount == 1)
-            return HandType.ONE_PAIR;
-        else
-            return HandType.HIGH_CARD;
+        } else {
+            int fstCount = counts.get(0) + jokerCount;
+            int sndCount = counts.size() == 1 ? 0 : counts.get(1);
+            if (fstCount == 5)
+                return HandType.FIVE_OF_A_KIND;
+            else if (fstCount == 4)
+                return HandType.FOUR_OF_A_KIND;
+            else if (fstCount == 3 && sndCount == 2)
+                return HandType.FULL_HOUSE;
+            else if (fstCount == 3 && sndCount == 1)
+                return HandType.THREE_OF_A_KIND;
+            else if (fstCount == 2 && sndCount == 2)
+                return HandType.TWO_PAIR;
+            else if (fstCount == 2 && sndCount == 1)
+                return HandType.ONE_PAIR;
+            else
+                return HandType.HIGH_CARD;
+        }
     }
 
     @Override
@@ -45,7 +54,7 @@ public class HandComparator implements Comparator<Hand> {
         HandType h2HandType = getHandType(h2);
 
         if (h1HandType.equals(h2HandType)) {
-            var cardComparator = new CardComparator();
+            var cardComparator = new CardWithJokerComparator();
             int cmp1 = cardComparator.compare(h1.c1(), h2.c1());
             int cmp2 = cardComparator.compare(h1.c2(), h2.c2());
             int cmp3 = cardComparator.compare(h1.c3(), h2.c3());
