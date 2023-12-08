@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import sugui.dayXX.DayXX;
+
 /**
  * Unit test for simple App.
  */
