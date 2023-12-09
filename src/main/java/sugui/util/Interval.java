@@ -44,10 +44,6 @@ public class Interval implements Iterable<Long> {
         iterator.add(node);
     }
 
-    /**
-     * Adds the external interval to the current interval, modifying it.
-     * @param extInterval the inverval to add to the current interval
-     */
     public Interval union(Interval extInterval) {
         Interval toret = new Interval();
         for (Node node : interval) {
